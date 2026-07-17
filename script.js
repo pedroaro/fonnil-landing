@@ -67,6 +67,17 @@ function buildMailto(kind) {
     '&body=' + encodeURIComponent(t.body);
 }
 
+// Open a mailto: reliably across platforms (iOS Safari included).
+function openMail(url) {
+  const a = document.createElement('a');
+  a.href = url;
+  a.target = '_blank';        // desktop webmail handlers open a compose tab
+  a.rel = 'noopener';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
 function newChallenge() {
   const a = Math.floor(Math.random() * 8) + 2;   // 2..9
   const b = Math.floor(Math.random() * 8) + 2;   // 2..9
@@ -107,8 +118,12 @@ function submitVerify() {
     answerEl.focus();
     return;
   }
-  // Passed — open the user's mail client in a new tab with a prefilled message.
-  window.open(buildMailto(currentKind), '_blank', 'noopener');
+  // Passed — hand off to the user's mail client with a prefilled message.
+  // NOTE: use a real anchor click, not window.open(). iOS Safari drops
+  // window.open('mailto:', '_blank') (blank tab / popup blocked and never
+  // reaches Mail). An <a> click is handled natively by iOS, and desktop
+  // webmail handlers still honor target="_blank" for a compose tab.
+  openMail(buildMailto(currentKind));
   closeVerify();
 }
 
