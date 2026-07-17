@@ -130,6 +130,55 @@ if (overlay) {
   });
 }
 
+/* ============================================================
+   Scroll reveal — fade + rise as elements enter the viewport
+   (also runs on first load for anything already on screen).
+   ============================================================ */
+(function () {
+  const REVEAL = [
+    '.hero-copy > *', '.hero-visual',
+    '.band-inner > *',
+    '.eyebrow', '.section-title', '.section-lead',
+    '.feature-card', '.dark-title', '.dark-row', '.plat-card',
+    '.about-copy > *', '.stat-card',
+    '.cta-inner > *',
+    '.footer-brand', '.footer-col'
+  ].join(',');
+
+  const els = Array.from(document.querySelectorAll(REVEAL));
+  if (!els.length) return;
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // No IntersectionObserver or reduced motion → just show everything.
+  if (reduce || !('IntersectionObserver' in window)) {
+    els.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  // Stagger siblings so rows/cards cascade instead of popping at once.
+  const groups = new Map();
+  els.forEach(el => {
+    const p = el.parentElement;
+    if (!groups.has(p)) groups.set(p, []);
+    groups.get(p).push(el);
+  });
+  groups.forEach(list => list.forEach((el, i) => {
+    el.style.transitionDelay = Math.min(i * 70, 350) + 'ms';
+  }));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+  els.forEach(el => io.observe(el));
+})();
+
 // Subtle header shadow on scroll
 const header = document.querySelector('.site-header');
 const onScroll = () => {

@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Enable scroll-reveal styling only when JS is available (prevents a flash of hidden content) -->
+  <script>document.documentElement.classList.add('js');</script>
   <title>Fonnil — Hiring built for healthcare. Finally.</title>
+  <link rel="icon" href="assets/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="assets/logo.png" />
   <meta name="description" content="The applicant tracking system designed by healthcare professionals — with licensure, credentialing, fit scoring and real-world schedules built into every step, for every role in your practice." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -357,14 +361,14 @@
         <a href="#platform">Compliance Tracking — exploring</a>
       </div>
 
-      <div class="footer-col">
+      <div class="footer-col" hidden>
         <h4>Company</h4>
         <a href="#about">About</a>
         <a href="#">Careers</a>
         <a href="#cta">Contact</a>
       </div>
 
-      <div class="footer-col">
+      <div class="footer-col" hidden>
         <h4>Legal</h4>
         <a href="#">Privacy</a>
         <a href="#">Terms</a>
