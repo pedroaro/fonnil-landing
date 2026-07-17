@@ -28,7 +28,7 @@
       </nav>
 
       <div class="nav-actions">
-        <a href="#cta" class="btn btn-primary btn-sm">Book a demo</a>
+        <a href="#" class="btn btn-primary btn-sm" data-contact="demo">Book a demo</a>
         <button class="nav-toggle" aria-label="Menu" id="navToggle">
           <span></span><span></span><span></span>
         </button>
@@ -59,7 +59,7 @@
         </p>
 
         <div class="hero-actions">
-          <a href="#cta" class="btn btn-primary">Book a demo</a>
+          <a href="#" class="btn btn-primary" data-contact="demo">Book a demo</a>
           <a href="#why" class="btn btn-ghost">See how it works</a>
         </div>
 
@@ -330,8 +330,8 @@
         the fit scoring and the credentialing path — in 30 minutes.
       </p>
       <div class="hero-actions center">
-        <a href="#" class="btn btn-primary">Book a demo</a>
-        <a href="#" class="btn btn-ghost">Talk to the team</a>
+        <a href="#" class="btn btn-primary" data-contact="demo">Book a demo</a>
+        <a href="#" class="btn btn-ghost" data-contact="chill">Talk to the team</a>
       </div>
       <p class="cta-note">No pressure, no 40-slide deck. Just your roles, our system and straight answers.</p>
     </div>
@@ -376,7 +376,27 @@
     </div>
   </footer>
 
-  <a href="#cta" class="chat-fab">💬 Chat with us</a>
+  <a href="#" class="chat-fab" data-contact="chill">💬 Chat with us</a>
+
+  <!-- ============ CONTACT VERIFICATION MODAL ============ -->
+  <div class="verify-overlay" id="verifyOverlay" aria-hidden="true">
+    <div class="verify-card" role="dialog" aria-modal="true" aria-labelledby="verifyTitle">
+      <button class="verify-close" id="verifyClose" aria-label="Close">&times;</button>
+      <h3 id="verifyTitle" class="verify-heading">Quick check</h3>
+      <p class="verify-lead" id="verifyLead">Just making sure you're human before we open your email.</p>
+
+      <label class="verify-q" id="verifyQLabel" for="verifyAnswer"></label>
+      <input type="text" id="verifyAnswer" class="verify-input" inputmode="numeric"
+             autocomplete="off" placeholder="Your answer" />
+
+      <!-- honeypot: hidden from humans, bots tend to fill it -->
+      <input type="text" id="verifyHp" class="verify-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+      <p class="verify-error" id="verifyError"></p>
+      <button class="btn btn-primary verify-submit" id="verifySubmit">Continue to email</button>
+      <p class="verify-note">We never send email automatically — this just opens your own mail app with a message ready to review.</p>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
